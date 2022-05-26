@@ -9,8 +9,16 @@
 
 ## 构建方式
 
+### 构建 x86 镜像并推送
+
 ```bash
-make
+make all
+```
+
+### 构建 arm64 版本镜像并推送
+
+```bash
+make buildarm64
 ```
 
 ## 使用方式
