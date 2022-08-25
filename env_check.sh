@@ -20,7 +20,13 @@ function check_gateway() {
     fi
 
     # 检测网关节点是否有端口占用
-    ports=(80 443 6060 7070 8443)
+    if [ -z "$NOT_CHECK_7070" ]; then
+        echo -e "${INFO} 通过helm安装rainbond和控制台."
+        ports=(80 443 6060 7070 8443)
+    else
+        echo -e "${INFO} 通过helm对接集群到控制台."
+        ports=(80 443 6060 8443)
+    fi
     for ip in ${GATEWAY_IP[@]}; do
         if !(ping -c 1 -i 0.2 -W 1 $ip>/dev/null); then
             echo -e "${ERROR} Gateway $ip is unreachable!"
