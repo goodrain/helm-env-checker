@@ -14,7 +14,7 @@ function check_gateway() {
     a=$?
     `curl docker.io &> /dev/null`
     b=$?
-    if [ $? -ne  0 ] && [ $b -ne 0 ]
+    if [ $a -ne  0 ] && [ $b -ne 0 ]
     then
         echo "外部网络不可访问，退出安装"
         return
