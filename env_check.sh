@@ -10,6 +10,15 @@ WARN=${YELLOW}WARN${NC}
 
 # 检测网关节点是否被定义
 function check_gateway() {
+    `ping registry.cn-hangzhou.aliyuncs.com -c4 &>/dev/null`
+    a=$?
+    `curl docker.io &> /dev/null`
+    b=$?
+    if [ $? -ne  0 ] && [ $b -ne 0 ]
+    then
+        echo "外部网络不可访问，退出安装"
+        return
+    fi
     if [ -z "$GATEWAY_IP" ]; then
         echo -e "${WARN} No custom gateway nodes are detected, which is highly discouraged."
         echo -e "${WARN} 没有检测到自定义的网关节点,即将自动选择网关节点并跳过检测."
